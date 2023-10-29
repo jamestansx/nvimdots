@@ -9,6 +9,7 @@ return {
             ensure_installed = {
                 "lua",
                 "comment",
+                "dart",
                 "markdown",
                 "markdown_inline",
                 "vimdoc",
