@@ -64,6 +64,7 @@ return {
                 }, {
                     {
                         name = "buffer",
+                        keyword_length = 5,
                         option = {
                             -- Only load buffers that are smaller than max_size, to increase performance
                             get_bufnrs = function()
