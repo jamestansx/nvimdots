@@ -1,6 +1,6 @@
+local capabilites = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 local utils = require("jamestansx.utils")
-local capabilites = vim.lsp.protocol.make_client_capabilities()
 
 lspconfig.lua_ls.setup({
     capabilities = capabilites,

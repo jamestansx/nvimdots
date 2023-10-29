@@ -15,6 +15,9 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPost", "BufNewFile" },
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+        },
         config = function()
             require("plugins.lsp.handlers") -- Override lsp handlers
             require("plugins.lsp.servers")
@@ -42,7 +45,16 @@ return {
         ft = { "dart" },
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
+            ui = {
+                border = "none",
+                notification_style = "native",
+            },
             fvm = true,
+            widget_guides = { enabled = true },
+            lsp = {
+                color = { enabled = true },
+                settings = { showTodos = false },
+            },
         },
     },
 }

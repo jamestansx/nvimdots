@@ -18,6 +18,7 @@ return {
             end,
         },
         integrations = {
+            cmp = true,
             fidget = true,
             native_lsp = {
                 enabled = true,
