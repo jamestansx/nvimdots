@@ -17,7 +17,7 @@ vim.opt.titlestring = "%f%( [%M%R%H%W]%)%( -%a%)%<"
 
 vim.opt.laststatus = 3
 vim.opt.colorcolumn = "80"
-vim.opt.cursorline = true
+--vim.opt.cursorline = true
 vim.opt.cmdheight = 2
 
 -- TODO: Make signcolumn static so that it doesn't jump around
