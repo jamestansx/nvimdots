@@ -20,6 +20,7 @@ return {
         integrations = {
             cmp = true,
             fidget = true,
+            flash = true,
             indent_blankline = { enabled = true },
             native_lsp = {
                 enabled = true,
