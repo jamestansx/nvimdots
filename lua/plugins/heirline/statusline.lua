@@ -1,6 +1,15 @@
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
+local flex = {
+    filename = 1,
+    lsp = 2,
+    fileencoding = 3,
+    filetype = 4,
+    diagnostic = 5,
+    git = 6,
+}
+
 local Align, Space, Null, Break
 do
     Align = { provider = "%=" }
@@ -25,7 +34,7 @@ do
                 self.lfilename = self.unnamed
             end
         end,
-        flexible = 1,
+        flexible = flex.filename,
 
         hl = { fg = utils.get_highlight("Directory").fg },
 
@@ -111,7 +120,7 @@ end
 local GitBlock
 do
     local GitBranch = {
-        flexible = 3,
+        flexible = flex.git,
 
         {
             -- TODO: trigger event on NeogitStatusRefreshed
@@ -180,7 +189,7 @@ do
         end,
 
         {
-            flexible = 4,
+            flexible = flex.diagnostic,
             {
                 Space,
                 {
@@ -199,7 +208,7 @@ end
 local LspBlock
 do
     local LspActive = {
-        flexible = 2,
+        flexible = flex.lsp,
         {
             update = { "LspAttach", "LspDetach" },
             provider = function(self)
@@ -234,21 +243,29 @@ do
         end,
 
         hl = { fg = "yellow", bold = true },
-        update = { "FileType" },
+
+        flexible = flex.filetype,
 
         {
+            update = { "FileType" },
             provider = function()
                 return vim.bo.filetype
             end,
         },
+        Null,
     }
 
     FileEncoding = {
         hl = { fg = "yellow" },
-        provider = function()
-            local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc
-            return enc
-        end,
+        flexible = flex.fileencoding,
+
+        {
+            provider = function()
+                local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc
+                return enc
+            end,
+        },
+        Null,
     }
 end
 
@@ -268,7 +285,7 @@ do
         { FileNameBlock, Space },
         { GitBlock, DiagnosticsBlock, LspBlock },
         Align,
-        { FileType, Space, FileEncoding, Space },
+        { FileEncoding, Space, FileType, Space },
         PosBlock,
     }
 
