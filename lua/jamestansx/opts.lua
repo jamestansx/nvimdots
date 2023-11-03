@@ -151,3 +151,14 @@ autocmd({ "BufEnter" }, {
         }
     end,
 })
+
+local signs = {
+    DiagnosticSignError = { text = "E", texthl = "DiagnosticSignError" },
+    DiagnosticSignWarn = { text = "W", texthl = "DiagnosticSignWarn" },
+    DiagnosticSignInfo = { text = "I", texthl = "DiagnosticSignInfo" },
+    DiagnosticSignHint = { text = "H", texthl = "DiagnosticSignHint" },
+}
+
+for name, sign in pairs(signs) do
+    vim.fn.sign_define(name, sign)
+end
